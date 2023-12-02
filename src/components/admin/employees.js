@@ -3,22 +3,23 @@ import React from 'react'
 export default function Employees() {
   return (
     <>
+    <br />
     <div className="container">
         <h1>Employees</h1>
         <table className="table">
     <thead>
         <tr>
             <th>
-                model.Firstname
+                First name
             </th>
             <th>
-                model.Lastname
+                Last name
             </th>
             <th>
-                model.Email
+                Email
             </th>
             <th>
-                model.DateJoined
+                Date Joined
             </th>
             <th></th>
         </tr>
@@ -26,19 +27,19 @@ export default function Employees() {
     <tbody>
         <tr>
             <td>
-                item.Firstname
+                Firstname
             </td>
             <td>
-                item.Lastname
+                Lastname
             </td>
             <td>
-                item.Email
+                Email
             </td>
             <td>
-                item.DateJoined
+                DateJoined
             </td>
             <td>
-                <a className="btn btn-primary" href='/'>View Allocations</a> 
+                <a className="btn btn-primary" href='/allocation'>View Allocations</a> 
             </td>
         </tr>
 

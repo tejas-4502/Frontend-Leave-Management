@@ -10,7 +10,7 @@ import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const ApplyLeave = () => {
+const Try = () => {
 
     const [show, setShow] = useState(false);
 
@@ -156,76 +156,72 @@ const ApplyLeave = () => {
                 <h1>Apply For Leave</h1> <hr />
 
                 <form onSubmit={(e) => {
-                    e.preventDefault();
-                    handleSave();
-                }}>
-                    {/* Leave Type */}
-                    <label htmlFor="">Leave Type</label>
-                    {additionalData.length > 0 ? (
-                        <select
-                            className="form-control"
-                            value={leave}
-                            onChange={(e) => setLeave(e.target.value)}
-                            required
-                        >
-                            <option value="">--Select Leave Type--</option>
-                            {additionalData.map((item) => (
-                                <option key={item.id} value={item.leave}>
-                                    {item.leave}
-                                </option>
-                            ))}
-                        </select>
-                    ) : (
-                        <input
-                            type="text"
-                            className="form-control"
-                            placeholder="Leave Type"
-                            value={leave}
-                            onChange={(e) => setLeave(e.target.value)}
-                            required
-                        />
-                    )} <br />
+    e.preventDefault();
+    handleSave();
+}}>
+    {/* Leave Type */}
+    {additionalData.length > 0 ? (
+        <select
+            className="form-control"
+            value={leave}
+            onChange={(e) => setLeave(e.target.value)}
+            required
+        >
+            <option value="">--Select Leave Type--</option>
+            {additionalData.map((item) => (
+                <option key={item.id} value={item.leave}>
+                    {item.leave}
+                </option>
+            ))}
+        </select>
+    ) : (
+        <input
+            type="text"
+            className="form-control"
+            placeholder="Leave Type"
+            value={leave}
+            onChange={(e) => setLeave(e.target.value)}
+            required
+        />
+    )}
 
-                    <Row>
-                        <Col>
-                            {/* Start date */}
-                            <label htmlFor="">Start date</label>
-                            <input
-                                type="date"
-                                className="form-control"
-                                placeholder="Start date"
-                                value={startdate}
-                                onChange={(e) => setStartdate(e.target.value)}
-                                required
-                            />
-                        </Col>
-                        <Col>
-                            {/* End date */}
-                            <label htmlFor="">End date</label>
-                            <input
-                                type="date"
-                                className="form-control"
-                                placeholder="End date"
-                                value={enddate}
-                                onChange={(e) => setEnddate(e.target.value)}
-                                required
-                            /> <br />
-                        </Col>
-                    </Row>
-                    {/* Request Comments */}
-                    <label htmlFor="">Request Comments</label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Comments"
-                        value={comments}
-                        onChange={(e) => setComments(e.target.value)}
-                        required
-                    /> <br />
+    {/* Start date */}
+    <label htmlFor="">Start date</label>
+    <input
+        type="date"
+        className="form-control"
+        placeholder="Start date"
+        value={startdate}
+        onChange={(e) => setStartdate(e.target.value)}
+        required
+    />
 
-                    {/* Submit button */}
-                    <button type="submit" className="btn btn-primary">Create</button>
-                </form>
+    {/* End date */}
+    <label htmlFor="">End date</label>
+    <input
+        type="date"
+        className="form-control"
+        placeholder="End date"
+        value={enddate}
+        onChange={(e) => setEnddate(e.target.value)}
+        required
+    />
+
+    {/* Request Comments */}
+    <label htmlFor="">Request Comments</label>
+    <input
+        type="text"
+        className="form-control"
+        placeholder="Comments"
+        value={comments}
+        onChange={(e) => setComments(e.target.value)}
+        required
+    />
+
+    {/* Submit button */}
+    <button type="submit" className="btn btn-primary">Create</button>
+</form>
+
 
             </Container>
 
@@ -233,4 +229,4 @@ const ApplyLeave = () => {
     )
 }
 
-export default ApplyLeave;
+export default Try;

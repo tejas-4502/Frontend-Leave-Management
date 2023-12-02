@@ -3,6 +3,7 @@ import React from 'react'
 export default function Leaverequest() {
     return (
         <>
+        <br />
             <div className="container">
                 <h1>Admin Leave Requests View</h1>
                 <div className="row">

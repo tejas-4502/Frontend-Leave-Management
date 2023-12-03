@@ -1,3 +1,7 @@
+# This Application
+This is a frontend application of leave management which will be connected to anther backend application of asp.net
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

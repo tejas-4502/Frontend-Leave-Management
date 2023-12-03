@@ -10,23 +10,20 @@ import Leavetype from './components/admin/leavetype';
 import Leaverequest from './components/admin/leaverequest';
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Try from './components/common/try';
-import Try1 from './components/common/try1';
 
 function App() {
   return (
     <>
       <Router>
-        {/* <Navbar /> */}
-        <Navbar user/>
-        {/* <Navbar admin/> */}
-
-        {/* <Try />
-        <Try1 /> */}
-
         <Routes>
+          <Route path="/homeuser" element={<Navbar user />} />
+          <Route path="/homeadmin" element={<Navbar admin />} />
+
+
           <Route path="/home" element={<Home />} />
-          <Route path="" element={<Home />} />
+          <Route path="/user" element={<Navbar user />} />
+          <Route path="/admin" element={<Navbar admin />} />
+          <Route path="" element={<Navbar />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/applyleave" element={<ApplyLeave />} />
@@ -36,7 +33,7 @@ function App() {
           <Route path="/leaverequest" element={<Leaverequest />} />
         </Routes>
 
-        
+
       </Router>
     </>
   );

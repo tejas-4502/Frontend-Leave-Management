@@ -1,9 +1,11 @@
 import React from 'react'
+import Navbar from '../common/navbar'
 
 export default function Leaverequest() {
     return (
         <>
-        <br />
+            <Navbar admin />
+            <br />
             <div className="container">
                 <h1>Admin Leave Requests View</h1>
                 <div className="row">

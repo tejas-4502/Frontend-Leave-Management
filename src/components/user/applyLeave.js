@@ -9,6 +9,7 @@ import Container from "react-bootstrap/Container";
 import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Navbar from "../common/navbar";
 
 const ApplyLeave = () => {
 
@@ -82,8 +83,8 @@ const ApplyLeave = () => {
         const data = {
 
             "leave": leave,
-            "birthday": startdate,
-            "joindate": enddate,
+            "startdate": startdate,
+            "enddate": enddate,
             "comments": comments
         }
         axios.post(url, data)
@@ -116,8 +117,8 @@ const ApplyLeave = () => {
         const data = {
             "id": editID,
             "leave": editLeave,
-            "birthday": editStartdate,
-            "joindate": editEnddate,
+            "startdate": editStartdate,
+            "enddate": editEnddate,
             "comments": editComments
         }
         axios.put(url, data)
@@ -151,6 +152,7 @@ const ApplyLeave = () => {
 
     return (
         <Fragment>
+            <Navbar user />
             <ToastContainer />
             <Container><br />
                 <h1>Apply For Leave</h1> <hr />
@@ -159,7 +161,6 @@ const ApplyLeave = () => {
                     e.preventDefault();
                     handleSave();
                 }}>
-                    {/* Leave Type */}
                     <label htmlFor="">Leave Type</label>
                     {additionalData.length > 0 ? (
                         <select
@@ -188,7 +189,6 @@ const ApplyLeave = () => {
 
                     <Row>
                         <Col>
-                            {/* Start date */}
                             <label htmlFor="">Start date</label>
                             <input
                                 type="date"
@@ -200,7 +200,6 @@ const ApplyLeave = () => {
                             />
                         </Col>
                         <Col>
-                            {/* End date */}
                             <label htmlFor="">End date</label>
                             <input
                                 type="date"
@@ -212,7 +211,6 @@ const ApplyLeave = () => {
                             /> <br />
                         </Col>
                     </Row>
-                    {/* Request Comments */}
                     <label htmlFor="">Request Comments</label>
                     <input
                         type="text"
@@ -223,7 +221,6 @@ const ApplyLeave = () => {
                         required
                     /> <br />
 
-                    {/* Submit button */}
                     <button type="submit" className="btn btn-primary">Create</button>
                 </form>
 

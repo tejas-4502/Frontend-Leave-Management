@@ -30,14 +30,14 @@ export function Navuser() {
         <>
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div className="container-fluid container">
-                    <a className="navbar-brand" href="/home">Leave-Management</a>
+                    <a className="navbar-brand" href="/homeuser">Leave-Management</a>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
                     <div className="collapse navbar-collapse" id="navbarNavDropdown">
                         <ul className="navbar-nav">
                             <li className="nav-item">
-                                <a className="nav-link active" aria-current="page" href="/home">Home</a>
+                                <a className="nav-link active" aria-current="page" href="/homeuser">Home</a>
                             </li>
                             <li className="nav-item">
                                 <a className="nav-link" href="/applyleave">Apply for Leave</a>
@@ -48,7 +48,7 @@ export function Navuser() {
                         </ul>
                     </div>
                     <form className="d-flex">
-                        <h5>user</h5>
+                        <a href="/login">Logout</a>
                     </form>
                 </div>
             </nav>
@@ -60,14 +60,14 @@ export function Navadmin() {
         <>
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div className="container-fluid container">
-                    <a className="navbar-brand" href="/home">Leave-Management</a>
+                    <a className="navbar-brand" href="/homeadmin">Leave-Management</a>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
                     <div className="collapse navbar-collapse" id="navbarNavDropdown">
                         <ul className="navbar-nav">
                             <li className="nav-item">
-                                <a className="nav-link active" aria-current="page" href="/home">Home</a>
+                                <a className="nav-link active" aria-current="page" href="/homeadmin">Home</a>
                             </li>
                             <li className="nav-item">
                                 <a className="nav-link" href="/employees">Employees</a>
@@ -84,7 +84,8 @@ export function Navadmin() {
                         </ul>
                     </div>
                     <form className="d-flex">
-                        <h5>user</h5>
+                        {/* <h5>user</h5> */}
+                        <a href="/login">Logout</a>
                     </form>
                 </div>
             </nav>
@@ -95,11 +96,11 @@ export function Navadmin() {
 export default function Navbar(props) {
     if (props.user) {
         return <Navuser />;
-      }
+    }
     if (props.admin) {
         return <Navadmin />;
-      }
-      else {
+    }
+    else {
         return <Nav />;
-      }
+    }
 }

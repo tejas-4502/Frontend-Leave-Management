@@ -9,6 +9,7 @@ import Container from "react-bootstrap/Container";
 import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Navbar from '../common/navbar'
 
 const Leavetype = () => {
 
@@ -120,6 +121,7 @@ const Leavetype = () => {
 
     return (
         <Fragment>
+            <Navbar admin />
             <ToastContainer />
             <Container><br />
                 <h1>Create Leave Type</h1> <hr />

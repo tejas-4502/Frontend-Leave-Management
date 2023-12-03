@@ -9,6 +9,7 @@ import Container from "react-bootstrap/Container";
 import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Navbar from "../common/navbar";
 
 const MyLeave = () => {
 
@@ -49,7 +50,7 @@ const MyLeave = () => {
     const handleEdit = (id) => {
         // alert(id);
         handleShow();
-        axios.get(`http://localhost:5219/api/Leaveapply/${id}`)
+        axios.get(`http://localhost:5219/api/LeaveApply/${id}`)
             .then((result) => {
                 setEditLeave(result.data.leave);
                 setEditStartdate(result.data.birthday);
@@ -82,8 +83,8 @@ const MyLeave = () => {
         const data = {
 
             "leave": leave,
-            "birthday": startdate.toString(),
-            "joindate": enddate,
+            "startdate": startdate.toString(),
+            "enddate": enddate,
             "comments": comments
         }
         axios.post(url, data)
@@ -116,8 +117,8 @@ const MyLeave = () => {
         const data = {
             "id": editID,
             "leave": editLeave,
-            "birthday": editStartdate,
-            "joindate": editEnddate,
+            "startdate": editStartdate,
+            "enddate": editEnddate,
             "comments": editComments
         }
         axios.put(url, data)
@@ -149,6 +150,7 @@ const MyLeave = () => {
 
     return (
         <Fragment>
+            <Navbar user />
             <ToastContainer />
             <Container>
                 <br />
@@ -170,8 +172,8 @@ const MyLeave = () => {
                                     return (
                                         <tr key={index}>
                                             <td>{item.leave}</td>
-                                            <td>{item.birthday}</td>
-                                            <td>{item.joindate}</td>
+                                            <td>{item.startdate}</td>
+                                            <td>{item.enddate}</td>
                                             <td>{item.comments}</td>
                                             <td>
                                                 <button className="btn btn-primary" onClick={() => handleEdit(item.id)}>Edit</button> &nbsp;

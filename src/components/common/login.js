@@ -1,21 +1,23 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Navbar from './navbar';
 
 const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [birthday, setBirthday] = useState('');
-    const [joindate, setJoindate] = useState('');
-    const [name, setName] = useState('');
+    const [birthday] = useState('');
+    const [joindate] = useState('');
+    const [name] = useState('');
     const [loginStatus, setLoginStatus] = useState('');
 
     const navigate = useNavigate();
 
 
-    const hardcodedUsername = 'admin@gmail.com';
-    const hardcodedPassword = 'admin';
+    const adminUsername = 'admin@gmail.com';
+    const adminPassword = 'admin';
 
 
 
@@ -23,7 +25,8 @@ const Login = () => {
         e.preventDefault();
 
         try {
-            if (username === hardcodedUsername && password === hardcodedPassword) {
+            if (username === adminUsername && password === adminPassword) {
+                toast.success('Login successful!');
                 setLoginStatus('Login successful!');
                 navigate('/admin');
                 // After upon successful login
@@ -36,8 +39,8 @@ const Login = () => {
                     name
                 });
 
-                // When returns a success message upon successful login
                 if (response.data === 'Login successful') {
+                    toast.success('Login successful!');
                     setLoginStatus('Login successful!');
                     navigate('/user');
                     // Further actions upon successful login
@@ -46,6 +49,7 @@ const Login = () => {
                 }
             }
         } catch (error) {
+            toast.error('Login Failed!');
             console.error('Login failed:', error);
             setLoginStatus('Login failed');
         }
@@ -54,6 +58,7 @@ const Login = () => {
     return (
         <>
             <Navbar />
+            <ToastContainer />
             <div className="container pt-5">
                 <h1>Log in</h1>
                 <h2>Use a local account to log in.</h2> <hr />
@@ -70,7 +75,7 @@ const Login = () => {
                         <br />
                         <button type="submit" className="w-100 btn btn-lg btn btn-primary">Login</button>
                     </form>
-                    {loginStatus && <p>{loginStatus}</p>}
+                    {loginStatus && <p style={{ color: 'red', fontWeight: 'bold' }}>{loginStatus}</p>}
                 </section>
             </div>
         </>

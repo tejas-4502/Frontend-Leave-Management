@@ -32,8 +32,6 @@ function App() {
           <Route path="/leavetype" element={<Leavetype />} />
           <Route path="/leaverequest" element={<Leaverequest />} />
         </Routes>
-
-
       </Router>
     </>
   );

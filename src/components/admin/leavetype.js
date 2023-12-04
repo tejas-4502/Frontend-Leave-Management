@@ -5,7 +5,6 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Container from "react-bootstrap/Container";
 import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -44,7 +43,6 @@ const Leavetype = () => {
     }
 
     const handleEdit = (id) => {
-        // alert(id);
         handleShow();
         axios.get(`http://localhost:5219/api/Leavetype/${id}`)
             .then((result) => {
@@ -121,9 +119,9 @@ const Leavetype = () => {
 
     return (
         <Fragment>
-            <Navbar admin />
+            <Navbar admin /> <br />
+            <div className="container">
             <ToastContainer />
-            <Container><br />
                 <h1>Create Leave Type</h1> <hr />
                 <label htmlFor="">Leave Type</label>
                 <input type="text" className="form-control" placeholder="Leave Type" value={leave} onChange={(e) => setLeave(e.target.value)}></input>
@@ -133,9 +131,7 @@ const Leavetype = () => {
                 <br />
                 <button className="btn btn-primary" onClick={() => handleSave()}>Create</button>
 
-            </Container>
             <br></br>
-            <Container>
                 <h1>Index (Leave Types)</h1> <hr />
                 <Table>
                     <thead>
@@ -166,7 +162,6 @@ const Leavetype = () => {
 
                     </tbody>
                 </Table>
-            </Container>
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Update Leave Type</Modal.Title>
@@ -193,7 +188,7 @@ const Leavetype = () => {
                     </Button>
                 </Modal.Footer>
             </Modal>
-
+            </div>
         </Fragment>
     )
 }

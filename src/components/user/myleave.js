@@ -19,10 +19,10 @@ const MyLeave = () => {
     const handleShow = () => setShow(true);
 
     // Add
-    const [leave, setLeave] = useState('')
-    const [startdate, setStartdate] = useState('')
-    const [enddate, setEnddate] = useState('')
-    const [comments, setComments] = useState('')
+    const [setLeave] = useState('')
+    const [setStartdate] = useState('')
+    const [setEnddate] = useState('')
+    const [setComments] = useState('')
 
     //Edit
     const [editID, setEditId] = useState('')
@@ -48,7 +48,6 @@ const MyLeave = () => {
     }
 
     const handleEdit = (id) => {
-        // alert(id);
         handleShow();
         axios.get(`http://localhost:5219/api/LeaveApply/${id}`)
             .then((result) => {
@@ -78,26 +77,6 @@ const MyLeave = () => {
         }
     }
 
-    const handleSave = () => {
-        const url = 'http://localhost:5219/api/Leaveapply';
-        const data = {
-
-            "leave": leave,
-            "startdate": startdate.toString(),
-            "enddate": enddate,
-            "comments": comments
-        }
-        axios.post(url, data)
-            .then((result) => {
-                getData();
-                clear();
-                toast.success('Leave request has been created');
-            })
-            .catch((error) => {
-                toast.error(error);
-            })
-    }
-
     const clear = () => {
         setLeave('');
         setStartdate('');
@@ -110,7 +89,6 @@ const MyLeave = () => {
         setEditComments('');
         setEditId('');
     }
-
 
     const handleUpdate = () => {
         const url = `http://localhost:5219/api/Leaveapply/${editID}`;

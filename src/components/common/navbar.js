@@ -84,7 +84,6 @@ export function Navadmin() {
                         </ul>
                     </div>
                     <form className="d-flex">
-                        {/* <h5>user</h5> */}
                         <a href="/login">Logout</a>
                     </form>
                 </div>

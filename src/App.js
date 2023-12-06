@@ -1,5 +1,4 @@
 import './App.css';
-import Navbar from './components/common/navbar';
 import Home from './components/common/home';
 import Login from './components/common/login';
 import Register from './components/common/register';
@@ -16,14 +15,11 @@ function App() {
     <>
       <Router>
         <Routes>
-          <Route path="/homeuser" element={<Navbar user />} />
-          <Route path="/homeadmin" element={<Navbar admin />} />
-
-
+          <Route path="/homeadmin" element={<Home admin />} />
+          <Route path="/homeuser" element={<Home user />} />
           <Route path="/home" element={<Home />} />
-          <Route path="/user" element={<Navbar user />} />
-          <Route path="/admin" element={<Navbar admin />} />
-          <Route path="" element={<Navbar />} />
+          <Route path="" element={<Home />} />
+
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/applyleave" element={<ApplyLeave />} />

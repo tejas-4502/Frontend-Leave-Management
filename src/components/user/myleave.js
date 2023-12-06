@@ -5,6 +5,8 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPencil, faTrash } from '@fortawesome/free-solid-svg-icons'
 import Container from "react-bootstrap/Container";
 import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
@@ -14,9 +16,19 @@ import Navbar from "../common/navbar";
 const MyLeave = () => {
 
     const [show, setShow] = useState(false);
-
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    const [show1, setShow1] = useState(false);
+    const handleClose1 = () => setShow1(false);
+    const handleShow1 = () => setShow1(true);
+
+    // delete
+    const [deleteItemId, setDeleteItemId] = useState(null);
+    const handleDeleteConfirmation = (id) => {
+        setDeleteItemId(id);
+        handleShow1();
+    };
 
     // Add
     const [setLeave] = useState('')
@@ -51,10 +63,11 @@ const MyLeave = () => {
         handleShow();
         axios.get(`http://localhost:5219/api/LeaveApply/${id}`)
             .then((result) => {
-                setEditLeave(result.data.leave);
-                setEditStartdate(result.data.birthday);
-                setEditEnddate(result.data.joindate);
-                setEditComments(result.data.comments);
+                const { leave, startdate, enddate, comments } = result.data;
+                setEditLeave(leave);
+                setEditStartdate(new Date(startdate).toISOString().substr(0, 10));
+                setEditEnddate(new Date(enddate).toISOString().substr(0, 10));
+                setEditComments(comments);
                 setEditId(id);
             })
             .catch((error) => {
@@ -62,20 +75,21 @@ const MyLeave = () => {
             })
     }
 
-    const handleDelete = (id) => {
-        if (window.confirm("Are you sure to delete this Leave request") === true) {
-            axios.delete(`http://localhost:5219/api/Leaveapply/${id}`)
+    const confirmDelete = () => {
+        if (deleteItemId) {
+            axios.delete(`http://localhost:5219/api/Leaveapply/${deleteItemId}`)
                 .then((result) => {
                     if (result.status === 200) {
                         toast.success("Leave request has been deleted");
                         getData();
+                        handleClose1();
                     }
                 })
                 .catch((error) => {
                     toast.error(error);
-                })
+                });
         }
-    }
+    };
 
     const clear = () => {
         setLeave('');
@@ -111,10 +125,9 @@ const MyLeave = () => {
             })
     }
 
-
     const [additionalData, setAdditionalData] = useState([]);
 
-    // Function to fetch data from the second API endpoint
+    // API from different file endpoint
     useEffect(() => {
         axios.get('http://localhost:5219/api/Leavetype')
             .then((result) => {
@@ -132,8 +145,8 @@ const MyLeave = () => {
             <ToastContainer />
             <Container>
                 <br />
-                <h1>My leave Requests</h1> <hr />
-                <Table>
+                <h1 className="text-primary">My leave Requests</h1> <hr />
+                <Table striped hover className="table-secondary">
                     <thead>
                         <tr>
                             <th>Leave Type</th>
@@ -142,7 +155,7 @@ const MyLeave = () => {
                             <th>Comments</th>
                             <th>Actions</th>
                         </tr>
-                    </thead>
+                    </thead> <br />
                     <tbody>
                         {
                             data && data.length > 0 ?
@@ -154,8 +167,8 @@ const MyLeave = () => {
                                             <td>{item.enddate}</td>
                                             <td>{item.comments}</td>
                                             <td>
-                                                <button className="btn btn-primary" onClick={() => handleEdit(item.id)}>Edit</button> &nbsp;
-                                                <button className="btn btn-danger" onClick={() => handleDelete(item.id)}>Cancel</button>
+                                                <button className="btn btn-primary" onClick={() => handleEdit(item.id)}> <FontAwesomeIcon icon={faPencil} /> </button> &nbsp;
+                                                <button className="btn btn-danger" onClick={() => handleDeleteConfirmation(item.id)}> <FontAwesomeIcon icon={faTrash} /> </button>
                                             </td>
                                         </tr>
                                     )
@@ -163,14 +176,14 @@ const MyLeave = () => {
                                 :
                                 'Loading.....'
                         }
-
                     </tbody>
                 </Table>
             </Container>
+
             <Modal show={show} onHide={handleClose}>
                 <form onSubmit={handleUpdate}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Update Leave Request</Modal.Title>
+                        <Modal.Title className="text-primary">Update Leave Request</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <Col>
@@ -243,12 +256,28 @@ const MyLeave = () => {
                             Close
                         </Button>
                         <Button variant="primary" type="submit">
-                            Save Changes
+                            Save
                         </Button>
                     </Modal.Footer>
                 </form>
             </Modal>
 
+            <Modal show={show1} onHide={handleClose1}>
+                <Modal.Header closeButton>
+                    <Modal.Title className="text-danger">Delete Confirmation</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    Are you sure you want to delete this Leave request?
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose1}>
+                        Cancel
+                    </Button>
+                    <Button variant="danger" onClick={confirmDelete}>
+                        Delete
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </Fragment>
     )
 }

@@ -1,4 +1,6 @@
 import React from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faRightFromBracket } from '@fortawesome/free-solid-svg-icons'
 
 export function Nav() {
     return (
@@ -48,7 +50,7 @@ export function Navuser() {
                         </ul>
                     </div>
                     <form className="d-flex">
-                        <a href="/login">Logout</a>
+                        <a className="btn btn-outline-danger mx-2" href="/login">Logout <FontAwesomeIcon icon={faRightFromBracket} /></a>
                     </form>
                 </div>
             </nav>
@@ -84,7 +86,7 @@ export function Navadmin() {
                         </ul>
                     </div>
                     <form className="d-flex">
-                        <a href="/login">Logout</a>
+                        <a className="btn btn-outline-danger mx-2" href="/login">Logout <FontAwesomeIcon icon={faRightFromBracket} /></a>
                     </form>
                 </div>
             </nav>

@@ -15,10 +15,8 @@ const Login = () => {
 
     const navigate = useNavigate();
 
-
     const adminUsername = 'admin@gmail.com';
-    const adminPassword = 'admin';
-
+    const adminPassword = 'P@ssword1';
 
 
     const handleSubmit = async (e) => {
@@ -28,8 +26,8 @@ const Login = () => {
             if (username === adminUsername && password === adminPassword) {
                 toast.success('Login successful!');
                 setLoginStatus('Login successful!');
-                navigate('/admin');
-                // After upon successful login
+                navigate('/homeadmin');
+                // After successful login
             } else {
                 const response = await axios.post('http://localhost:5219/api/User/login', {
                     username,
@@ -42,7 +40,7 @@ const Login = () => {
                 if (response.data === 'Login successful') {
                     toast.success('Login successful!');
                     setLoginStatus('Login successful!');
-                    navigate('/user');
+                    navigate('/homeuser');
                     // Further actions upon successful login
                 } else {
                     setLoginStatus('Invalid credentials');
@@ -60,23 +58,23 @@ const Login = () => {
             <Navbar />
             <ToastContainer />
             <div className="container pt-5">
-                <h1>Log in</h1>
-                <h2>Use a local account to log in.</h2> <hr />
-                <section>
-                    <form onSubmit={handleSubmit}>
-                        <div className="form-floating mb-3">
-                            <input type="text" value={username} className='form-control' onChange={(e) => setUsername(e.target.value)} />
-                            <label htmlFor="email" className="form-label">Username/Email</label>
+                <div className="row justify-content-center">
+                    <div className="col-md-6">
+                        <div className="card shadow-lg p-4">
+                            <h1 className="text-center mb-4 text-success">Login</h1> <hr />
+                            <form onSubmit={handleSubmit}>
+                                <div className="mb-3">
+                                    <input type="text" value={username} className='form-control' placeholder="Username/Email" onChange={(e) => setUsername(e.target.value)} />
+                                </div>
+                                <div className="mb-3">
+                                    <input type="password" value={password} className='form-control' placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
+                                </div>
+                                <button type="submit" className="btn btn-primary w-100">Login</button>
+                            </form>
+                            {loginStatus && <p className="text-danger mt-3">{loginStatus}</p>}
                         </div>
-                        <div className="form-floating mb-3">
-                            <input type="password" value={password} className='form-control' onChange={(e) => setPassword(e.target.value)} />
-                            <label htmlFor="password" className="form-label">Password</label>
-                        </div>
-                        <br />
-                        <button type="submit" className="w-100 btn btn-lg btn btn-primary">Login</button>
-                    </form>
-                    {loginStatus && <p style={{ color: 'red', fontWeight: 'bold' }}>{loginStatus}</p>}
-                </section>
+                    </div>
+                </div>
             </div>
         </>
     );

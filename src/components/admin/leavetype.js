@@ -160,10 +160,10 @@ const Leavetype = () => {
                                     <div className="card shadow-lg p-4">
                                         <h1 className="text-primary">Create Leave Type</h1> <hr /> <br />
                                         <label htmlFor="">Leave Type</label>
-                                        <input type="text" className="form-control" placeholder="Leave Type" value={leave} onChange={(e) => setLeave(e.target.value)}></input>
+                                        <input type="text" className="form-control" placeholder="Leave Type" value={leave} onChange={(e) => setLeave(e.target.value)} required />
                                         <br />
                                         <label htmlFor="">No. of days</label>
-                                        <input type="number" className="form-control" placeholder="No. of Days" value={days} onChange={(e) => setDays(e.target.value)}></input>
+                                        <input type="number" className="form-control" placeholder="No. of Days" value={days} onChange={(e) => setDays(e.target.value)} required />
                                         <br />
                                         <button className="btn btn-primary" onClick={() => handleSave()}>Create</button> <br />
                                     </div>

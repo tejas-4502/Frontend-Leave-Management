@@ -98,7 +98,7 @@ const ApplyLeave = () => {
         <Fragment>
             <Navbar user />
             <ToastContainer /> <br />
-            <Container className="justify-content-center align-items-center">
+            <Container>
                 <div className="p-5 shadow-lg rounded bg-light">
                     <h1 className="mb-4 text-primary">Apply For Leave</h1> <hr />
                     <form onSubmit={(e) => {
@@ -164,11 +164,10 @@ const ApplyLeave = () => {
                                 placeholder="Comments"
                                 value={comments}
                                 onChange={(e) => setComments(e.target.value)}
-                                rows={3}
+                                rows={2}
                             />
                             {errors.comments && <div className="text-danger">{errors.comments}</div>}
                         </div>
-
                         <button type="submit" className="btn btn-primary">Create</button>
                     </form>
                 </div>

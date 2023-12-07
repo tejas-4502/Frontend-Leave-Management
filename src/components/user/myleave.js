@@ -31,10 +31,10 @@ const MyLeave = () => {
     };
 
     // Add
-    const [setLeave] = useState('')
-    const [setStartdate] = useState('')
-    const [setEnddate] = useState('')
-    const [setComments] = useState('')
+    const [, setLeave] = useState('');
+    const [, setStartdate] = useState('');
+    const [, setEnddate] = useState('');
+    const [, setComments] = useState('');
 
     //Edit
     const [editID, setEditId] = useState('')
@@ -121,6 +121,7 @@ const MyLeave = () => {
                 toast.success('Leave request has been updated');
             })
             .catch((error) => {
+                toast.error('Leave request updating failed');
                 toast.error(error);
             })
     }
@@ -139,13 +140,53 @@ const MyLeave = () => {
     }, []);
 
 
+    // card of leave available
+    const [data1, setData1] = useState([]);
+
+    useEffect(() => {
+        getData1();
+    }, [])
+
+    const getData1 = () => {
+        axios.get('http://localhost:5219/api/Leavetype')
+            .then((result) => {
+                setData1(result.data)
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }
+
+    const [currentPage, setCurrentPage] = useState(1);
+    const rowsPerPage = 2;
+
+    const indexOfLastRow = currentPage * rowsPerPage;
+    const indexOfFirstRow = indexOfLastRow - rowsPerPage;
+    const currentRows = data.slice(indexOfFirstRow, indexOfLastRow);
+
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+
     return (
         <Fragment>
             <Navbar user />
-            <ToastContainer />
+            <ToastContainer /> <br />
             <Container>
+                <div className="row">
+                    <h2 className="mb-4 text-primary">Allocated Leaves</h2> <hr />
+                    {data1.map((item, index) => (
+                        <div className="col-md-4 mb-3" key={index}>
+                            <div className="card">
+                                <div className="card-body">
+                                    <h4 className="card-title text-info">{item.leave}</h4> <hr />
+                                    <p className="card-text">No. of Days: {item.days}</p>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
                 <br />
-                <h1 className="text-primary">My leave Requests</h1> <hr />
+                <h2 className="text-primary">My leave Requests</h2> <hr />
                 <Table striped hover className="table-light">
                     <thead>
                         <tr>
@@ -154,112 +195,128 @@ const MyLeave = () => {
                             <th>End date</th>
                             <th>Comments</th>
                             <th>Actions</th>
+                            <th>Status</th>
                         </tr>
                     </thead> <br />
                     <tbody>
-                        {
-                            data && data.length > 0 ?
-                                data.map((item, index) => {
-                                    return (
-                                        <tr key={index}>
-                                            <td>{item.leave}</td>
-                                            <td>{item.startdate}</td>
-                                            <td>{item.enddate}</td>
-                                            <td>{item.comments}</td>
-                                            <td>
-                                                <button className="btn btn-primary" onClick={() => handleEdit(item.id)}> <FontAwesomeIcon icon={faPencil} /> </button> &nbsp;
-                                                <button className="btn btn-danger" onClick={() => handleDeleteConfirmation(item.id)}> <FontAwesomeIcon icon={faTrash} /> </button>
-                                            </td>
-                                        </tr>
-                                    )
-                                })
-                                :
-                                'Loading.....'
-                        }
+                        {currentRows.map((item, index) => (
+                            <tr key={index}>
+                                <td>{item.leave}</td>
+                                <td>{item.startdate}</td>
+                                <td>{item.enddate}</td>
+                                <td>{item.comments}</td>
+                                <td>
+                                    <button className="btn btn-primary" onClick={() => handleEdit(item.id)}> <FontAwesomeIcon icon={faPencil} /> </button> &nbsp;
+                                    <button className="btn btn-danger" onClick={() => handleDeleteConfirmation(item.id)}> <FontAwesomeIcon icon={faTrash} /> </button>
+                                </td>
+                                <td>
+                                    <button className="btn btn-warning">Pending</button>
+                                </td>
+                            </tr>
+                        ))}
                     </tbody>
                 </Table>
+                <div className="d-flex justify-content-center">
+                    <ul className="pagination">
+                        {Array.from(
+                            { length: Math.ceil(data.length / rowsPerPage) },
+                            (_, index) => (
+                                <li
+                                    key={index}
+                                    className={`page-item ${currentPage === index + 1 ? "active" : ""
+                                        }`}
+                                >
+                                    <button
+                                        className="page-link"
+                                        onClick={() => paginate(index + 1)}
+                                    >
+                                        {index + 1}
+                                    </button>
+                                </li>
+                            )
+                        )}
+                    </ul>
+                </div>
             </Container>
 
             <Modal show={show} onHide={handleClose}>
-                <form onSubmit={handleUpdate}>
-                    <Modal.Header closeButton>
-                        <Modal.Title className="text-primary">Update Leave Request</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <Col>
-                            <label htmlFor="">Leave Type</label>
-                            {additionalData.length > 0 ? (
-                                <select
-                                    className="form-control"
-                                    value={editLeave}
-                                    onChange={(e) => setEditLeave(e.target.value)}
-                                    required
-                                >
-                                    <option value="">--Select Leave Type--</option>
-                                    {additionalData.map((item) => (
-                                        <option key={item.id} value={item.leave}>
-                                            {item.leave}
-                                        </option>
-                                    ))}
-                                </select>
-                            ) : (
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    placeholder="Leave Type"
-                                    value={editLeave}
-                                    onChange={(e) => setEditLeave(e.target.value)}
-                                    required
-                                />
-                            )}
-
-                        </Col><br />
-                        <Row>
-                            <Col>
-                                <label htmlFor="">Start date</label>
-                                <input
-                                    type="date"
-                                    className="form-control"
-                                    placeholder="Start date"
-                                    value={editStartdate}
-                                    onChange={(e) => setEditStartdate(e.target.value)}
-                                    required
-                                />
-                            </Col>
-                            <Col>
-                                <label htmlFor="">End date</label>
-                                <input
-                                    type="date"
-                                    className="form-control"
-                                    placeholder="End date"
-                                    value={editEnddate}
-                                    onChange={(e) => setEditEnddate(e.target.value)}
-                                    required
-                                />
-                            </Col>
-                        </Row>
-                        <br />
-                        <Col>
-                            <label htmlFor="">Comments</label>
+                <Modal.Header closeButton>
+                    <Modal.Title className="text-primary">Update Leave Request</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Col>
+                        <label htmlFor="">Leave Type</label>
+                        {additionalData.length > 0 ? (
+                            <select
+                                className="form-control"
+                                value={editLeave}
+                                onChange={(e) => setEditLeave(e.target.value)}
+                                required
+                            >
+                                <option value="">--Select Leave Type--</option>
+                                {additionalData.map((item) => (
+                                    <option key={item.id} value={item.leave}>
+                                        {item.leave}
+                                    </option>
+                                ))}
+                            </select>
+                        ) : (
                             <input
                                 type="text"
                                 className="form-control"
-                                placeholder="Comments"
-                                value={editComments}
-                                onChange={(e) => setEditComments(e.target.value)}
+                                placeholder="Leave Type"
+                                value={editLeave}
+                                onChange={(e) => setEditLeave(e.target.value)}
+                                required
+                            />
+                        )}
+
+                    </Col><br />
+                    <Row>
+                        <Col>
+                            <label htmlFor="">Start date</label>
+                            <input
+                                type="date"
+                                className="form-control"
+                                placeholder="Start date"
+                                value={editStartdate}
+                                onChange={(e) => setEditStartdate(e.target.value)}
                                 required
                             />
                         </Col>
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button variant="secondary" onClick={handleClose}>
-                            Close
-                        </Button>
-                        <Button variant="primary" type="submit">
-                            Save
-                        </Button>
-                    </Modal.Footer>
-                </form>
+                        <Col>
+                            <label htmlFor="">End date</label>
+                            <input
+                                type="date"
+                                className="form-control"
+                                placeholder="End date"
+                                value={editEnddate}
+                                onChange={(e) => setEditEnddate(e.target.value)}
+                                required
+                            />
+                        </Col>
+                    </Row>
+                    <br />
+                    <Col>
+                        <label htmlFor="">Comments</label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            placeholder="Comments"
+                            value={editComments}
+                            onChange={(e) => setEditComments(e.target.value)}
+                            required
+                        />
+                    </Col>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        Close
+                    </Button>
+                    <Button variant="primary" onClick={handleUpdate}>
+                        Save
+                    </Button>
+                </Modal.Footer>
             </Modal>
 
             <Modal show={show1} onHide={handleClose1}>

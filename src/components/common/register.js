@@ -77,7 +77,7 @@ const Register = () => {
                 }
             } catch (error) {
                 console.error('Registration failed:', error);
-                toast.error('Registration failed');
+                toast.error('Username is already in use');
             }
         } else {
             setValidationErrors(errors);
@@ -106,6 +106,7 @@ const Register = () => {
                                 </div>
                                 <div className="row mb-3">
                                     <div className="col">
+                                        <label htmlFor="">Birth date:</label>
                                         <input
                                             type="date"
                                             value={birthday}
@@ -115,6 +116,7 @@ const Register = () => {
                                         {validationErrors.birthday && <span className="text-danger">{validationErrors.birthday}</span>}
                                     </div>
                                     <div className="col">
+                                        <label htmlFor="">Joined date:</label>
                                         <input
                                             type="date"
                                             value={joindate}

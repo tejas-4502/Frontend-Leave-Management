@@ -14,7 +14,7 @@ import Table from 'react-bootstrap/Table';
 const Employees = () => {
     const [data, setData] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const [rowsPerPage] = useState(5);
+    const [rowsPerPage] = useState(4);
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedEmployee, setSelectedEmployee] = useState(null);
 
@@ -80,7 +80,7 @@ const Employees = () => {
             <Navbar admin />
             <Container className="my-5">
                 <ToastContainer />
-                <h1 className="text-primary">Employees</h1> <hr /><br />
+                <h1 className="text-primary">Employees</h1> <hr />
                 <div className="input-group mb-3">
                     <input type="text" className="form-control" placeholder="Search by name" onChange={(e) => setSearchTerm(e.target.value)} />
                 </div>

@@ -146,7 +146,7 @@ const MyLeave = () => {
             <Container>
                 <br />
                 <h1 className="text-primary">My leave Requests</h1> <hr />
-                <Table striped hover className="table-secondary">
+                <Table striped hover className="table-light">
                     <thead>
                         <tr>
                             <th>Leave Type</th>

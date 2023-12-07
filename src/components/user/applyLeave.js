@@ -99,7 +99,7 @@ const ApplyLeave = () => {
             <Navbar user />
             <ToastContainer /> <br />
             <Container className="justify-content-center align-items-center">
-                <div className="p-5 shadow-sm rounded bg-light">
+                <div className="p-5 shadow-lg rounded bg-light">
                     <h1 className="mb-4 text-primary">Apply For Leave</h1> <hr />
                     <form onSubmit={(e) => {
                         e.preventDefault();

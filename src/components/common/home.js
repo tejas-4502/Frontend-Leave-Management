@@ -5,30 +5,32 @@ export function Homebase() {
     return (
         <>
             <Navbar />
-            <div className="text-center mt-5">
-                <h1>Welcome to Leave Management</h1>
-            </div>
             <div className="container mt-5">
-                <h1 className="text-primary">React Frontend</h1>
-                <hr className="my-4" />
+                <div className="text-center mt-5">
+                    <h1 className="text-primary">Welcome to Leave Management</h1>
+                    <hr />
+                </div>
                 <div className="text-justify">
                     <p>
-                        React, sometimes referred to as a frontend JavaScript library, is a powerful tool created by Facebook. It's designed for building UI components, making it a popular choice for developing interactive user interfaces.
+                        A comprehensive Leave Management System encompasses a range of essential features to streamline the leave management process effectively. Some of these key features include:
                     </p>
                     <div className="row">
                         <div className="col-md-6">
-                            <h4>1. Component-based Architecture</h4>
+                            <h4>1. Online Leave Application</h4>
                             <p>
-                                React utilizes a component-based architecture, allowing developers to create reusable and encapsulated UI components. This modularity enhances maintainability and scalability.
+                                Employees can easily request leaves through a user-friendly online interface, specifying the type of leave, duration, and reason.
                             </p>
                         </div>
                         <div className="col-md-6">
-                            <h4>2. Strong Developer Tools</h4>
+                            <h4>2. Automated Workflows</h4>
                             <p>
-                                React provides powerful developer tools such as React DevTools, aiding in inspecting components, tracking state, and debugging, resulting in an improved development experience.
+                                The system allows for automated approval workflows, where leave requests are routed for quick and efficient decision-making.
                             </p>
                         </div>
                     </div>
+                </div>
+                <div className="text-center mt-5">
+                    <h1 className='text-danger'>Effortless, efficient, effective</h1><h1>leave management</h1>
                 </div>
             </div>
         </>
@@ -38,30 +40,32 @@ export function Homeuser() {
     return (
         <>
             <Navbar user />
-            <div className="text-center mt-5">
-                <h1>Welcome to Leave Management</h1>
-            </div>
             <div className="container mt-5">
-                <h1 className="text-primary">React Frontend</h1>
-                <hr className="my-4" />
+                <div className="text-center mt-5">
+                    <h1 className="text-primary">Welcome to Leave Management</h1>
+                    <hr />
+                </div>
                 <div className="text-justify">
                     <p>
-                        React, sometimes referred to as a frontend JavaScript library, is a powerful tool created by Facebook. It's designed for building UI components, making it a popular choice for developing interactive user interfaces.
+                        A comprehensive Leave Management System encompasses a range of essential features to streamline the leave management process effectively. Some of these key features include:
                     </p>
                     <div className="row">
                         <div className="col-md-6">
-                            <h4>1. Component-based Architecture</h4>
+                            <h4>1. Online Leave Application</h4>
                             <p>
-                                React utilizes a component-based architecture, allowing developers to create reusable and encapsulated UI components. This modularity enhances maintainability and scalability.
+                                Employees can easily request leaves through a user-friendly online interface, specifying the type of leave, duration, and reason.
                             </p>
                         </div>
                         <div className="col-md-6">
-                            <h4>2. Strong Developer Tools</h4>
+                            <h4>2. Automated Workflows</h4>
                             <p>
-                                React provides powerful developer tools such as React DevTools, aiding in inspecting components, tracking state, and debugging, resulting in an improved development experience.
+                                The system allows for automated approval workflows, where leave requests are routed for quick and efficient decision-making.
                             </p>
                         </div>
                     </div>
+                </div>
+                <div className="text-center mt-5">
+                    <h1 className='text-danger'>Effortless, efficient, effective</h1><h1>leave management</h1>
                 </div>
             </div>
         </>
@@ -71,30 +75,32 @@ export function Homeadmin() {
     return (
         <>
             <Navbar admin />
-            <div className="text-center mt-5">
-                <h1>Welcome to Leave Management</h1>
-            </div>
             <div className="container mt-5">
-                <h1 className="text-primary">React Frontend</h1>
-                <hr className="my-4" />
+                <div className="text-center mt-5">
+                    <h1 className="text-primary">Welcome to Leave Management</h1>
+                    <hr />
+                </div>
                 <div className="text-justify">
                     <p>
-                        React, sometimes referred to as a frontend JavaScript library, is a powerful tool created by Facebook. It's designed for building UI components, making it a popular choice for developing interactive user interfaces.
+                        A comprehensive Leave Management System encompasses a range of essential features to streamline the leave management process effectively. Some of these key features include:
                     </p>
                     <div className="row">
                         <div className="col-md-6">
-                            <h4>1. Component-based Architecture</h4>
+                            <h4>1. Online Leave Application</h4>
                             <p>
-                                React utilizes a component-based architecture, allowing developers to create reusable and encapsulated UI components. This modularity enhances maintainability and scalability.
+                                Employees can easily request leaves through a user-friendly online interface, specifying the type of leave, duration, and reason.
                             </p>
                         </div>
                         <div className="col-md-6">
-                            <h4>2. Strong Developer Tools</h4>
+                            <h4>2. Automated Workflows</h4>
                             <p>
-                                React provides powerful developer tools such as React DevTools, aiding in inspecting components, tracking state, and debugging, resulting in an improved development experience.
+                                The system allows for automated approval workflows, where leave requests are routed for quick and efficient decision-making.
                             </p>
                         </div>
                     </div>
+                </div>
+                <div className="text-center mt-5">
+                    <h1 className='text-danger'>Effortless, efficient, effective</h1><h1>leave management</h1>
                 </div>
             </div>
         </>

@@ -40,8 +40,10 @@ const Login = () => {
                 if (response.data === 'Login successful') {
                     toast.success('Login successful!');
                     setLoginStatus('Login successful!');
+                    // Storing user data as temp session storage
+                    sessionStorage.setItem('loggedInUser', JSON.stringify({ username }));
+                    // navigation after login
                     navigate('/homeuser');
-                    // Further actions upon successful login
                 } else {
                     setLoginStatus('Invalid credentials');
                 }

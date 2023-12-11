@@ -52,7 +52,8 @@ export function Navuser() {
                         </ul>
                     </div>
                     <form className="d-flex">
-                        <h5 className='text-success'>{username}</h5>
+                        <h5 className='text-light fst-italic navbar-brand'>Hi</h5>
+                        <h5 className='text-success fst-italic navbar-brand'>{username}</h5>
                         <a className="btn btn-outline-danger mx-2" href="/login">Logout <FontAwesomeIcon icon={faRightFromBracket} /></a>
                     </form>
                 </div>
@@ -89,7 +90,8 @@ export function Navadmin() {
                         </ul>
                     </div>
                     <form className="d-flex">
-                        <h5 className='text-success'>admin@gmail.com</h5>
+                        <h5 className='text-light fst-italic navbar-brand'>Hi</h5>
+                        <h5 className='text-success fst-italic navbar-brand'>admin@gmail.com</h5>
                         <a className="btn btn-outline-danger mx-2" href="/login">Logout <FontAwesomeIcon icon={faRightFromBracket} /></a>
                     </form>
                 </div>

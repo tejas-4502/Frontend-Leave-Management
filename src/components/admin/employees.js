@@ -27,7 +27,7 @@ const Employees = () => {
     }, [])
 
     const getData = () => {
-        axios.get('http://localhost:5219/api/User')
+        axios.get('https://localhost:44372/api/User')
             .then((result) => {
                 setData(result.data)
             })
@@ -61,7 +61,7 @@ const Employees = () => {
 
     const confirmDelete = () => {
         if (deleteEmployeeId) {
-            axios.delete(`http://localhost:5219/api/User/${deleteEmployeeId}`)
+            axios.delete(`https://localhost:44372/api/User/${deleteEmployeeId}`)
                 .then((result) => {
                     if (result.status === 200) {
                         toast.success("Employee has been deleted");

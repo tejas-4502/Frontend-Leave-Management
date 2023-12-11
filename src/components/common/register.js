@@ -62,7 +62,7 @@ const Register = () => {
         if (Object.keys(errors).length === 0) {
             try {
                 // Send registration data to the backend
-                const response = await axios.post('http://localhost:5219/api/User/register', {
+                const response = await axios.post('https://localhost:44372/api/User/register', {
                     username,
                     password,
                     birthday,

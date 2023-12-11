@@ -15,12 +15,15 @@ const ApplyLeave = () => {
     const [additionalData, setAdditionalData] = useState([]);
     const [errors, setErrors] = useState({});
 
+    const loggedInUser = sessionStorage.getItem('loggedInUser');
+    const username = loggedInUser ? JSON.parse(loggedInUser).username : '';
+
     useEffect(() => {
         getData();
     }, [])
 
     useEffect(() => {
-        axios.get('http://localhost:5219/api/Leavetype')
+        axios.get('https://localhost:44372/api/Leavetype')
             .then((result) => {
                 setAdditionalData(result.data);
             })
@@ -30,7 +33,7 @@ const ApplyLeave = () => {
     }, []);
 
     const getData = () => {
-        axios.get('http://localhost:5219/api/Leaveapply')
+        axios.get('https://localhost:44372/api/Leaveapply')
             .then((result) => {
                 setData(result.data)
             })
@@ -68,12 +71,13 @@ const ApplyLeave = () => {
             return;
         }
 
-        const url = 'http://localhost:5219/api/Leaveapply';
+        const url = 'https://localhost:44372/api/Leaveapply';
         const data = {
             "leave": leave,
             "startdate": startdate,
             "enddate": enddate,
-            "comments": comments
+            "comments": comments,
+            "username": username
         }
         axios.post(url, data)
             .then((result) => {

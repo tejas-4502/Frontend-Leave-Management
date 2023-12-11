@@ -34,7 +34,7 @@ const Leavetype = () => {
     }, [])
 
     const getData = () => {
-        axios.get('http://localhost:5219/api/Leavetype')
+        axios.get('https://localhost:44372/api/LeaveType')
             .then((result) => {
                 setData(result.data)
             })
@@ -45,7 +45,7 @@ const Leavetype = () => {
 
     const handleEdit = (id) => {
         handleShow();
-        axios.get(`http://localhost:5219/api/Leavetype/${id}`)
+        axios.get(`https://localhost:44372/api/Leavetype/${id}`)
             .then((result) => {
                 setEditLeave(result.data.leave);
                 setEditDays(result.data.days);
@@ -57,7 +57,7 @@ const Leavetype = () => {
     }
 
     const handleSave = () => {
-        const url = 'http://localhost:5219/api/Leavetype';
+        const url = 'https://localhost:44372/api/Leavetype';
         const data = {
 
             "leave": leave,
@@ -85,7 +85,7 @@ const Leavetype = () => {
 
 
     const handleUpdate = () => {
-        const url = `http://localhost:5219/api/Leavetype/${editID}`;
+        const url = `https://localhost:44372/api/Leavetype/${editID}`;
         const data = {
             "id": editID,
             "leave": editLeave,
@@ -133,7 +133,7 @@ const Leavetype = () => {
 
     const confirmDelete = () => {
         if (deleteId) {
-            axios.delete(`http://localhost:5219/api/Leavetype/${deleteId}`)
+            axios.delete(`https://localhost:44372/api/Leavetype/${deleteId}`)
                 .then((result) => {
                     if (result.status === 200) {
                         toast.success("Leave type has been deleted");

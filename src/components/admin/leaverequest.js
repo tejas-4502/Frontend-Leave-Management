@@ -16,7 +16,7 @@ const Leaverequest = () => {
     }, []);
 
     const getData = () => {
-        axios.get("http://localhost:5219/api/Leaveapply")
+        axios.get("https://localhost:44372/api/LeaveApply")
             .then((result) => {
                 setData(result.data);
             })
@@ -64,7 +64,7 @@ const Leaverequest = () => {
                     <tbody>
                         {currentRows.map((item, index) => (
                             <tr key={index}>
-                                <td>{ }</td>
+                                <td>{item.userName}</td>
                                 <td>{item.leave}</td>
                                 <td>{item.startdate}</td>
                                 <td>{item.enddate}</td>

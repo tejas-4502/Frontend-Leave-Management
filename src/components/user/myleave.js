@@ -50,7 +50,7 @@ const MyLeave = () => {
     }, [])
 
     const getData = () => {
-        axios.get('http://localhost:5219/api/Leaveapply')
+        axios.get('https://localhost:44372/api/Leaveapply')
             .then((result) => {
                 setData(result.data)
             })
@@ -61,7 +61,7 @@ const MyLeave = () => {
 
     const handleEdit = (id) => {
         handleShow();
-        axios.get(`http://localhost:5219/api/LeaveApply/${id}`)
+        axios.get(`https://localhost:44372/api/LeaveApply/${id}`)
             .then((result) => {
                 const { leave, startdate, enddate, comments } = result.data;
                 setEditLeave(leave);
@@ -77,7 +77,7 @@ const MyLeave = () => {
 
     const confirmDelete = () => {
         if (deleteItemId) {
-            axios.delete(`http://localhost:5219/api/Leaveapply/${deleteItemId}`)
+            axios.delete(`https://localhost:44372/api/Leaveapply/${deleteItemId}`)
                 .then((result) => {
                     if (result.status === 200) {
                         toast.success("Leave request has been deleted");
@@ -105,7 +105,7 @@ const MyLeave = () => {
     }
 
     const handleUpdate = () => {
-        const url = `http://localhost:5219/api/Leaveapply/${editID}`;
+        const url = `https://localhost:44372/api/Leaveapply/${editID}`;
         const data = {
             "id": editID,
             "leave": editLeave,
@@ -130,7 +130,7 @@ const MyLeave = () => {
 
     // API from different file endpoint
     useEffect(() => {
-        axios.get('http://localhost:5219/api/Leavetype')
+        axios.get('https://localhost:44372/api/Leavetype')
             .then((result) => {
                 setAdditionalData(result.data);
             })
@@ -148,7 +148,7 @@ const MyLeave = () => {
     }, [])
 
     const getData1 = () => {
-        axios.get('http://localhost:5219/api/Leavetype')
+        axios.get('https://localhost:44372/api/Leavetype')
             .then((result) => {
                 setData1(result.data)
             })

@@ -52,6 +52,7 @@ const MyLeave = () => {
         getData();
     },);
 
+    // get data by username
     const getData = () => {
         axios.get(`https://localhost:44372/api/LeaveApply/ByUserName?userName=${username}`)
             .then((result) => {

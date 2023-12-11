@@ -45,18 +45,21 @@ const MyLeave = () => {
 
     const [data, setData] = useState([]);
 
+    const loggedInUser = sessionStorage.getItem('loggedInUser');
+    const username = loggedInUser ? JSON.parse(loggedInUser).username : '';
+
     useEffect(() => {
         getData();
-    }, [])
+    },);
 
     const getData = () => {
-        axios.get('https://localhost:44372/api/Leaveapply')
+        axios.get(`https://localhost:44372/api/LeaveApply/ByUserName?userName=${username}`)
             .then((result) => {
-                setData(result.data)
+                setData(result.data);
             })
             .catch((error) => {
-                console.log(error)
-            })
+                console.log(error);
+            });
     }
 
     const handleEdit = (id) => {
@@ -111,7 +114,8 @@ const MyLeave = () => {
             "leave": editLeave,
             "startdate": editStartdate,
             "enddate": editEnddate,
-            "comments": editComments
+            "comments": editComments,
+            "username": username
         }
         axios.put(url, data)
             .then((result) => {

@@ -77,7 +77,8 @@ const ApplyLeave = () => {
             "startdate": startdate,
             "enddate": enddate,
             "comments": comments,
-            "username": username
+            "username": username,
+            "status": "pending"
         }
         axios.post(url, data)
             .then((result) => {

@@ -116,7 +116,8 @@ const MyLeave = () => {
             "startdate": editStartdate,
             "enddate": editEnddate,
             "comments": editComments,
-            "username": username
+            "username": username,
+            "status": "pending"
         }
         axios.put(url, data)
             .then((result) => {
@@ -215,7 +216,9 @@ const MyLeave = () => {
                                     <button className="btn btn-danger" onClick={() => handleDeleteConfirmation(item.id)}> <FontAwesomeIcon icon={faTrash} /> </button>
                                 </td>
                                 <td>
-                                    <button className="btn btn-warning">Pending</button>
+                                    <div class="badge bg-primary text-wrap">
+                                        {item.status}
+                                    </div>
                                 </td>
                             </tr>
                         ))}

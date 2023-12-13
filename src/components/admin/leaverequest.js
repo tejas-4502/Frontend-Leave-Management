@@ -2,7 +2,7 @@ import React, { useState, useEffect, Fragment } from "react";
 import Navbar from "../common/navbar";
 import Table from "react-bootstrap/Table";
 import axios from "axios";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Leaverequest = () => {
@@ -34,9 +34,34 @@ const Leaverequest = () => {
 
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+    const handleAccept = (id) => {
+        axios.put(`https://localhost:44372/api/LeaveApply/${id}/Accept`)
+            .then(() => {
+                toast.success("Leave request accepted");
+                getData();
+            })
+            .catch((error) => {
+                toast.error("Error accepting leave request");
+                console.log(error);
+            });
+    };
+
+    const handleDecline = (id) => {
+        axios.put(`https://localhost:44372/api/LeaveApply/${id}/Decline`)
+            .then(() => {
+                toast.success("Leave request declined");
+                getData();
+            })
+            .catch((error) => {
+                toast.error("Error declining leave request");
+                console.log(error);
+            });
+    };
+
     return (
         <Fragment>
             <Navbar admin />
+            <ToastContainer />
             <br />
             <div className="container">
                 <ToastContainer />
@@ -59,6 +84,7 @@ const Leaverequest = () => {
                             <th>End date</th>
                             <th>Comments</th>
                             <th>Actions</th>
+                            <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -70,8 +96,23 @@ const Leaverequest = () => {
                                 <td>{item.enddate}</td>
                                 <td>{item.comments}</td>
                                 <td>
-                                    <button className="btn btn-primary">Accept</button>
-                                    <button className="btn btn-danger ms-2">Decline</button>
+                                    <button
+                                        className="btn btn-primary"
+                                        onClick={() => handleAccept(item.id)}
+                                    >
+                                        Accept
+                                    </button>
+                                    <button
+                                        className="btn btn-danger ms-2"
+                                        onClick={() => handleDecline(item.id)}
+                                    >
+                                        Decline
+                                    </button>
+                                </td>
+                                <td>
+                                    <div class="badge bg-primary text-wrap">
+                                        {item.status}
+                                    </div>
                                 </td>
                             </tr>
                         ))}

@@ -212,11 +212,11 @@ const MyLeave = () => {
                                 <td>{item.enddate}</td>
                                 <td>{item.comments}</td>
                                 <td>
-                                    <button className="btn btn-primary" onClick={() => handleEdit(item.id)}> <FontAwesomeIcon icon={faPencil} /> </button> &nbsp;
-                                    <button className="btn btn-danger" onClick={() => handleDeleteConfirmation(item.id)}> <FontAwesomeIcon icon={faTrash} /> </button>
+                                    <button className="btn btn-primary" disabled={item.status === 'Accepted' || item.status === 'Declined'} onClick={() => handleEdit(item.id)}> <FontAwesomeIcon icon={faPencil} /> </button> &nbsp;
+                                    <button className="btn btn-danger" disabled={item.status === 'Accepted' || item.status === 'Declined'} onClick={() => handleDeleteConfirmation(item.id)}> <FontAwesomeIcon icon={faTrash} /> </button>
                                 </td>
                                 <td>
-                                    <div class="badge bg-primary text-wrap">
+                                    <div className={`badge text-wrap ${item.status === 'pending' ? 'bg-warning' : item.status === 'Accepted' ? 'bg-success' : item.status === 'Declined' ? 'bg-danger' : ''}`}>
                                         {item.status}
                                     </div>
                                 </td>

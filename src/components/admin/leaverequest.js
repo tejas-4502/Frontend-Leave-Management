@@ -98,19 +98,21 @@ const Leaverequest = () => {
                                 <td>
                                     <button
                                         className="btn btn-primary"
+                                        disabled={item.status === 'Accepted' || item.status === 'Declined'}
                                         onClick={() => handleAccept(item.id)}
                                     >
                                         Accept
                                     </button>
                                     <button
                                         className="btn btn-danger ms-2"
+                                        disabled={item.status === 'Accepted' || item.status === 'Declined'}
                                         onClick={() => handleDecline(item.id)}
                                     >
                                         Decline
                                     </button>
                                 </td>
                                 <td>
-                                    <div class="badge bg-primary text-wrap">
+                                    <div className={`badge text-wrap ${item.status === 'pending' ? 'bg-warning' : item.status === 'Accepted' ? 'bg-success' : item.status === 'Declined' ? 'bg-danger' : ''}`}>
                                         {item.status}
                                     </div>
                                 </td>

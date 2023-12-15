@@ -4,12 +4,56 @@ import Table from "react-bootstrap/Table";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
 
 const Leaverequest = () => {
     const [data, setData] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [rowsPerPage] = useState(5);
     const [searchTerm, setSearchTerm] = useState("");
+
+    const [showAcceptModal, setShowAcceptModal] = useState(false);
+    const [showDeclineModal, setShowDeclineModal] = useState(false);
+    const [selectedItemId, setSelectedItemId] = useState(null);
+
+    const handleAccept = (id) => {
+        setSelectedItemId(id);
+        setShowAcceptModal(true);
+    };
+
+    const handleDecline = (id) => {
+        setSelectedItemId(id);
+        setShowDeclineModal(true);
+    };
+
+    const confirmAccept = () => {
+        axios
+            .put(`https://localhost:44372/api/LeaveApply/${selectedItemId}/Accept`)
+            .then(() => {
+                toast.success("Leave request accepted");
+                getData();
+                setShowAcceptModal(false);
+            })
+            .catch((error) => {
+                toast.error("Error accepting leave request");
+                console.log(error);
+            });
+    };
+
+    const confirmDecline = () => {
+        axios
+            .put(`https://localhost:44372/api/LeaveApply/${selectedItemId}/Decline`)
+            .then(() => {
+                toast.success("Leave request declined");
+                getData();
+                setShowDeclineModal(false);
+            })
+            .catch((error) => {
+                toast.error("Error declining leave request");
+                console.log(error);
+            });
+    };
 
     useEffect(() => {
         getData();
@@ -33,30 +77,6 @@ const Leaverequest = () => {
     const currentRows = filteredData.slice(indexOfFirstRow, indexOfLastRow);
 
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
-    const handleAccept = (id) => {
-        axios.put(`https://localhost:44372/api/LeaveApply/${id}/Accept`)
-            .then(() => {
-                toast.success("Leave request accepted");
-                getData();
-            })
-            .catch((error) => {
-                toast.error("Error accepting leave request");
-                console.log(error);
-            });
-    };
-
-    const handleDecline = (id) => {
-        axios.put(`https://localhost:44372/api/LeaveApply/${id}/Decline`)
-            .then(() => {
-                toast.success("Leave request declined");
-                getData();
-            })
-            .catch((error) => {
-                toast.error("Error declining leave request");
-                console.log(error);
-            });
-    };
 
     return (
         <Fragment>
@@ -144,6 +164,39 @@ const Leaverequest = () => {
                     </nav>
                 </div>
             </div>
+            <Modal show={showAcceptModal} onHide={() => setShowAcceptModal(false)}>
+                <Modal.Header closeButton>
+                    <Modal.Title className="text-primary">Confirm Accept</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    Are you sure you want to accept this leave request?
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={() => setShowAcceptModal(false)}>
+                        Cancel
+                    </Button>
+                    <Button variant="primary" onClick={confirmAccept}>
+                        Accept
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
+            <Modal show={showDeclineModal} onHide={() => setShowDeclineModal(false)}>
+                <Modal.Header closeButton>
+                    <Modal.Title className="text-danger">Confirm Decline</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    Are you sure you want to decline this leave request?
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={() => setShowDeclineModal(false)}>
+                        Cancel
+                    </Button>
+                    <Button variant="danger" onClick={confirmDecline}>
+                        Decline
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </Fragment>
     );
 };

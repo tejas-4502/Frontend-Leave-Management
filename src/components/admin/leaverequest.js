@@ -3,6 +3,8 @@ import Navbar from "../common/navbar";
 import Table from "react-bootstrap/Table";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faThumbsDown, faThumbsUp } from '@fortawesome/free-solid-svg-icons'
 import "react-toastify/dist/ReactToastify.css";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
@@ -98,7 +100,7 @@ const Leaverequest = () => {
                 <Table striped hover className="table-light">
                     <thead>
                         <tr>
-                            <th>Employee Name</th>
+                            <th>Employee Username</th>
                             <th>Leave Type</th>
                             <th>Start date</th>
                             <th>End date</th>
@@ -121,14 +123,14 @@ const Leaverequest = () => {
                                         disabled={item.status === 'Accepted' || item.status === 'Declined'}
                                         onClick={() => handleAccept(item.id)}
                                     >
-                                        Accept
+                                        <FontAwesomeIcon icon={faThumbsUp} />
                                     </button>
                                     <button
                                         className="btn btn-danger ms-2"
                                         disabled={item.status === 'Accepted' || item.status === 'Declined'}
                                         onClick={() => handleDecline(item.id)}
                                     >
-                                        Decline
+                                        <FontAwesomeIcon icon={faThumbsDown} />
                                     </button>
                                 </td>
                                 <td>

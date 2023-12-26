@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { InputText } from 'primereact/inputtext';
+import { Button } from 'primereact/button';
+import { Card } from 'primereact/card';
+import { Calendar } from 'primereact/calendar';
 import Navbar from './navbar';
 
 const Register = () => {
@@ -91,64 +95,100 @@ const Register = () => {
             <div className="container pt-4">
                 <div className="row justify-content-center">
                     <div className="col-md-6">
-                        <div className="card p-4 shadow-lg registration-card">
-                            <h1 className="text-center mb-4 text-success">Register</h1> <hr />
-                            <form onSubmit={handleSubmit}>
-                                <div className="mb-3">
-                                    <input
-                                        type="text"
-                                        value={name}
-                                        className='form-control'
-                                        placeholder="Enter your name"
-                                        onChange={(e) => setName(e.target.value)}
-                                    />
-                                    {validationErrors.name && <span className="text-danger">{validationErrors.name}</span>}
+                        <Card className="shadow-lg registration-card">
+                            <h1 className="text-center mb-2 text-success">Register</h1>
+                            <hr />
+                            <form onSubmit={handleSubmit} className="p-fluid">
+                                <div>
+                                    <div className="p-inputgroup flex-1">
+                                        <span className="p-inputgroup-addon">
+                                            <i className="pi pi-user"></i>
+                                        </span>
+                                        <InputText
+                                            value={name}
+                                            onChange={(e) => setName(e.target.value)}
+                                            className={validationErrors.name ? 'p-invalid' : ''}
+                                            placeholder="Full Name"
+                                        />
+                                    </div>
+                                    <div>
+                                        {validationErrors.name && <small className="p-error">{validationErrors.name}</small>}
+                                    </div>
                                 </div>
+                                <br />
+
                                 <div className="row mb-3">
                                     <div className="col">
-                                        <label htmlFor="">Birth date:</label>
-                                        <input
-                                            type="date"
-                                            value={birthday}
-                                            className='form-control'
-                                            onChange={(e) => setBirthday(e.target.value)}
-                                        />
-                                        {validationErrors.birthday && <span className="text-danger">{validationErrors.birthday}</span>}
+                                        <span className="p-float-label">
+                                            <Calendar
+                                                id="birthday"
+                                                value={birthday}
+                                                onChange={(e) => setBirthday(e.value)}
+                                                dateFormat="dd/mm/yy"
+                                                className={validationErrors.birthday ? 'p-invalid' : ''}
+                                                showIcon
+                                            />
+                                            <label htmlFor="birthday">Birth date</label>
+                                        </span>
+                                        {validationErrors.birthday && <small className="p-error">{validationErrors.birthday}</small>}
                                     </div>
                                     <div className="col">
-                                        <label htmlFor="">Joined date:</label>
-                                        <input
-                                            type="date"
-                                            value={joindate}
-                                            className='form-control'
-                                            onChange={(e) => setJoindate(e.target.value)}
-                                        />
-                                        {validationErrors.joindate && <span className="text-danger">{validationErrors.joindate}</span>}
+                                        <span className="p-float-label">
+                                            <Calendar
+                                                id="joindate"
+                                                value={joindate}
+                                                onChange={(e) => setJoindate(e.value)}
+                                                dateFormat="dd/mm/yy"
+                                                className={validationErrors.joindate ? 'p-invalid' : ''}
+                                                showIcon
+                                            />
+                                            <label htmlFor="joindate">Joined date</label>
+                                        </span>
+                                        {validationErrors.joindate && <small className="p-error">{validationErrors.joindate}</small>}
                                     </div>
                                 </div>
-                                <div className="mb-3">
-                                    <input
-                                        type="text"
-                                        value={username}
-                                        className='form-control'
-                                        placeholder="Enter your email"
-                                        onChange={(e) => setUsername(e.target.value)}
-                                    />
-                                    {validationErrors.username && <span className="text-danger">{validationErrors.username}</span>}
+
+                                <div>
+                                    <div className="p-inputgroup flex-1">
+                                        <span className="p-inputgroup-addon">
+                                            <i className="pi pi-user"></i>
+                                        </span>
+                                        <InputText
+                                            id="email"
+                                            value={username}
+                                            onChange={(e) => setUsername(e.target.value)}
+                                            className={validationErrors.username ? 'p-invalid' : ''}
+                                            placeholder="Enter Email"
+                                        />
+                                    </div>
+                                    <div>
+                                        {validationErrors.username && <small className="p-error">{validationErrors.username}</small>}
+                                    </div>
                                 </div>
-                                <div className="mb-3">
-                                    <input
-                                        type="password"
-                                        value={password}
-                                        className='form-control'
-                                        placeholder="Enter your password"
-                                        onChange={(e) => setPassword(e.target.value)}
-                                    />
-                                    {validationErrors.password && <span className="text-danger">{validationErrors.password}</span>}
+                                <br />
+
+                                <div>
+                                    <div className="p-inputgroup flex-1">
+                                        <span className="p-inputgroup-addon">
+                                            <i className="pi pi-lock"></i>
+                                        </span>
+                                        <InputText
+                                            id="password"
+                                            type="password"
+                                            value={password}
+                                            onChange={(e) => setPassword(e.target.value)}
+                                            className={validationErrors.password ? 'p-invalid' : ''}
+                                            placeholder="Password"
+                                        />
+                                    </div>
+                                    <div>
+                                        {validationErrors.password && <small className="p-error">{validationErrors.password}</small>}
+                                    </div>
                                 </div>
-                                <button type="submit" className="btn btn-primary w-100">Register</button>
+                                <br />
+                                <Button type="submit" label="Register" className="p-button-primary w-100" />
                             </form>
-                        </div>
+                        </Card>
                     </div>
                 </div>
             </div>

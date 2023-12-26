@@ -1,4 +1,8 @@
 import './App.css';
+import 'primeicons/primeicons.css';
+import 'primereact/resources/themes/saga-blue/theme.css';
+import 'primereact/resources/primereact.min.css';
+
 import Home from './components/common/home';
 import Login from './components/common/login';
 import Register from './components/common/register';

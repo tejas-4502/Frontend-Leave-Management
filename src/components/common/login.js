@@ -3,6 +3,8 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { InputText } from 'primereact/inputtext';
+import { Password } from 'primereact/password';
 import Navbar from './navbar';
 
 const Login = () => {
@@ -65,12 +67,24 @@ const Login = () => {
                         <div className="card shadow-lg p-4">
                             <h1 className="text-center mb-4 text-success">Login</h1> <hr />
                             <form onSubmit={handleSubmit}>
-                                <div className="mb-3">
-                                    <input type="text" value={username} className='form-control' placeholder="Username/Email" onChange={(e) => setUsername(e.target.value)} />
+                                <div className="p-field">
+                                    <div className="p-inputgroup flex-1">
+                                        <span className="p-inputgroup-addon">
+                                            <i className="pi pi-user"></i>
+                                        </span>
+                                        <InputText value={username} placeholder="Username/Email" onChange={(e) => setUsername(e.target.value)} />
+                                    </div>
                                 </div>
-                                <div className="mb-3">
-                                    <input type="password" value={password} className='form-control' placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
+                                <br />
+                                <div className="p-field">
+                                    <div className="p-inputgroup flex-1">
+                                        <span className="p-inputgroup-addon">
+                                            <i className="pi pi-lock"></i>
+                                        </span>
+                                        <Password value={password} placeholder="Password" onChange={(e) => setPassword(e.target.value)} feedback={false} />
+                                    </div>
                                 </div>
+                                <br />
                                 <button type="submit" className="btn btn-primary w-100">Login</button>
                             </form>
                             {loginStatus && <p className="text-danger mt-3">{loginStatus}</p>}

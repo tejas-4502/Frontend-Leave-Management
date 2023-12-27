@@ -10,6 +10,7 @@ import Navbar from '../common/navbar'
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/Table';
+import { Paginator } from 'primereact/paginator';
 
 const Employees = () => {
     const [data, setData] = useState([]);
@@ -42,7 +43,9 @@ const Employees = () => {
     const filteredData = data.filter(item => item.name.toLowerCase().includes(searchTerm.toLowerCase()));
     const currentRows = filteredData.slice(indexOfFirstRow, indexOfLastRow);
 
-    const paginate = pageNumber => setCurrentPage(pageNumber);
+    const onPageChange = (event) => {
+        setCurrentPage(event.page + 1);
+    };
 
     const handleDetails = (employee) => {
         setSelectedEmployee(employee);
@@ -115,17 +118,12 @@ const Employees = () => {
                         ))}
                     </tbody>
                 </Table>
-                <div className="d-flex justify-content-center">
-                    <nav aria-label="Page navigation example">
-                        <ul className="pagination">
-                            {Array.from({ length: Math.ceil(filteredData.length / rowsPerPage) }, (_, index) => (
-                                <li key={index} className={`page-item ${currentPage === index + 1 ? 'active' : ''}`}>
-                                    <button className="page-link" onClick={() => paginate(index + 1)}>{index + 1}</button>
-                                </li>
-                            ))}
-                        </ul>
-                    </nav>
-                </div>
+                <Paginator
+                    first={indexOfFirstRow}
+                    rows={rowsPerPage}
+                    totalRecords={filteredData.length}
+                    onPageChange={onPageChange}
+                ></Paginator>
                 <Modal show={showModal} onHide={handleCloseModal}>
                     <Modal.Header closeButton>
                         <Modal.Title className="text-primary">Employee Details</Modal.Title>

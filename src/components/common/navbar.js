@@ -23,7 +23,7 @@ export function Nav() {
     const start = <img alt="logo" src="https://hrone.cloud/wp-content/uploads/2021/05/leave-management-1.png" height="30" className="mt-6"></img>;
 
     return (
-        <Menubar model={items} start={start} end={end} />
+        <Menubar model={items} start={start} end={end} className="menu-item" />
     );
 }
 
@@ -59,7 +59,7 @@ export function Navuser() {
     const start = <img alt="logo" src="https://hrone.cloud/wp-content/uploads/2021/05/leave-management-1.png" height="30" className="mt-6"></img>;
 
     return (
-        <Menubar model={items} start={start} end={end} />
+        <Menubar model={items} start={start} end={end} className="menu-item" />
     );
 }
 
@@ -97,7 +97,7 @@ export function Navadmin() {
     const start = <img alt="logo" src="https://hrone.cloud/wp-content/uploads/2021/05/leave-management-1.png" height="30" className="mt-6"></img>;
 
     return (
-        <Menubar model={items} start={start} end={end} />
+        <Menubar model={items} start={start} end={end} className="menu-item" />
     );
 }
 

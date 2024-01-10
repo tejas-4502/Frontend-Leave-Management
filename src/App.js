@@ -11,16 +11,22 @@ import MyLeave from './components/user/myleave';
 import Employees from './components/admin/employees';
 import Leavetype from './components/admin/leavetype';
 import Leaverequest from './components/admin/leaverequest';
+import { Navigate } from 'react-router-dom';
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
+  const loggedInUser = JSON.parse(sessionStorage.getItem('loggedInUser'));
   return (
     <>
       <Router>
         <Routes>
           <Route path="/homeadmin" element={<Home admin />} />
-          <Route path="/homeuser" element={<Home user />} />
+          <Route
+          path="/homeuser"
+          element={loggedInUser ? <Home user /> : <Navigate to="/login" />}
+        />
+
           <Route path="/home" element={<Home />} />
           <Route path="" element={<Home />} />
 

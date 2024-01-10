@@ -45,7 +45,9 @@ const Login = () => {
                     // Storing user data as temp session storage
                     sessionStorage.setItem('loggedInUser', JSON.stringify({ username }));
                     // navigation after login
-                    navigate('/homeuser');
+                    window.location.reload();
+                    window.location.href = '/homeuser';
+                    // navigate('homeuser');
                 } else {
                     setLoginStatus('Invalid credentials');
                 }

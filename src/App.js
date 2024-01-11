@@ -17,26 +17,53 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
   const loggedInUser = JSON.parse(sessionStorage.getItem('loggedInUser'));
+  const loggedInAdmin = JSON.parse(sessionStorage.getItem('loggedInAdmin'));
+  
   return (
     <>
       <Router>
+        {/* home navigation routes */}
         <Routes>
-          <Route path="/homeadmin" element={<Home admin />} />
           <Route
-          path="/homeuser"
-          element={loggedInUser ? <Home user /> : <Navigate to="/login" />}
-        />
+            path="/homeadmin"
+            element={loggedInAdmin ? <Home admin /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="/homeuser"
+            element={loggedInUser ? <Home user /> : <Navigate to="/login" />}
+          />
 
+          {/* common pages routes */}
           <Route path="/home" element={<Home />} />
           <Route path="" element={<Home />} />
 
+          {/* login and register routes */}
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/applyleave" element={<ApplyLeave />} />
-          <Route path="/myleave" element={<MyLeave />} />
-          <Route path="/employees" element={<Employees />} />
-          <Route path="/leavetype" element={<Leavetype />} />
-          <Route path="/leaverequest" element={<Leaverequest />} />
+
+          {/* user pages routes */}
+          <Route
+            path="/applyleave"
+            element={loggedInUser ? <ApplyLeave /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="/myleave"
+            element={loggedInUser ? <MyLeave /> : <Navigate to="/login" />}
+          />
+
+          {/* admin pages routes */}
+          <Route
+            path="/employees"
+            element={loggedInAdmin ? <Employees /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="/leavetype"
+            element={loggedInAdmin ? <Leavetype /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="/leaverequest"
+            element={loggedInAdmin ? <Leaverequest /> : <Navigate to="/login" />}
+          />
         </Routes>
       </Router>
     </>

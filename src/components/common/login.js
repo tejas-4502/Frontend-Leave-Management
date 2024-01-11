@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { InputText } from 'primereact/inputtext';
@@ -13,9 +13,10 @@ const Login = () => {
     const [birthday] = useState('');
     const [joindate] = useState('');
     const [name] = useState('');
-    const [loginStatus, setLoginStatus] = useState('');
+    // const [loginStatus, setLoginStatus] = useState('');
+    const [, setLoginStatus] = useState('');
 
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     const adminUsername = 'admin@gmail.com';
     const adminPassword = 'P@ssword1';
@@ -28,8 +29,12 @@ const Login = () => {
             if (username === adminUsername && password === adminPassword) {
                 toast.success('Login successful!');
                 setLoginStatus('Login successful!');
-                navigate('/homeadmin');
-                // After successful login
+                // Storing user data as temp session storage
+                sessionStorage.setItem('loggedInAdmin', JSON.stringify({ username }));
+                // navigation after login
+                window.location.reload();
+                window.location.href = '/homeadmin';
+                // navigate('/homeadmin');
             } else {
                 const response = await axios.post('https://localhost:44372/api/User/login', {
                     username,
@@ -89,7 +94,7 @@ const Login = () => {
                                 <br />
                                 <button type="submit" className="btn btn-primary w-100">Login</button>
                             </form>
-                            {loginStatus && <p className="text-danger mt-3">{loginStatus}</p>}
+                            {/* {loginStatus && <p className="text-danger mt-3">{loginStatus}</p>} */}
                         </div>
                     </div>
                 </div>

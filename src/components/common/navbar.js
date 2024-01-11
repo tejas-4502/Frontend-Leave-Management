@@ -85,7 +85,7 @@ export function Navadmin() {
                     icon: 'pi pi-power-off',
                     command: () => {
                         // Perform logout action here
-                        sessionStorage.removeItem('loggedInUser');
+                        sessionStorage.removeItem('loggedInAdmin');
                         // Redirect to login page 
                         window.location.href = '/login';
                     },

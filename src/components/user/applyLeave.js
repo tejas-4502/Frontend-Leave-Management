@@ -76,8 +76,8 @@ const ApplyLeave = () => {
         const url = 'https://localhost:44372/api/Leaveapply';
         const data = {
             "leave": leave,
-            "startdate": startdate,
-            "enddate": enddate,
+            "startdate": new Date(startdate).toISOString().split('T')[0],
+            "enddate": new Date(enddate).toISOString().split('T')[0],
             "comments": comments,
             "username": username,
             "status": "pending"

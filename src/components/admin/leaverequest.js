@@ -8,6 +8,7 @@ import { faThumbsDown, faThumbsUp } from '@fortawesome/free-solid-svg-icons'
 import "react-toastify/dist/ReactToastify.css";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
+import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 const Leaverequest = () => {
     const [data, setData] = useState([]);
@@ -118,20 +119,30 @@ const Leaverequest = () => {
                                 <td>{item.enddate}</td>
                                 <td>{item.comments}</td>
                                 <td>
-                                    <button
-                                        className="btn btn-primary"
-                                        disabled={item.status === 'Accepted' || item.status === 'Declined'}
-                                        onClick={() => handleAccept(item.id)}
+                                    <OverlayTrigger
+                                        placement="top"
+                                        overlay={<Tooltip id={`tooltip-decline-${item.id}`}>Accept</Tooltip>}
                                     >
-                                        <FontAwesomeIcon icon={faThumbsUp} />
-                                    </button>
-                                    <button
-                                        className="btn btn-danger ms-2"
-                                        disabled={item.status === 'Accepted' || item.status === 'Declined'}
-                                        onClick={() => handleDecline(item.id)}
+                                        <button
+                                            className="btn btn-primary"
+                                            disabled={item.status === 'Accepted' || item.status === 'Declined'}
+                                            onClick={() => handleAccept(item.id)}
+                                        >
+                                            <FontAwesomeIcon icon={faThumbsUp} />
+                                        </button>
+                                    </OverlayTrigger>
+                                    <OverlayTrigger
+                                        placement="top"
+                                        overlay={<Tooltip id={`tooltip-decline-${item.id}`}>Decline</Tooltip>}
                                     >
-                                        <FontAwesomeIcon icon={faThumbsDown} />
-                                    </button>
+                                        <Button
+                                            className="btn btn-danger ms-2"
+                                            disabled={item.status === 'Accepted' || item.status === 'Declined'}
+                                            onClick={() => handleDecline(item.id)}
+                                        >
+                                            <FontAwesomeIcon icon={faThumbsDown} />
+                                        </Button>
+                                    </OverlayTrigger>
                                 </td>
                                 <td>
                                     <div className={`badge text-wrap ${item.status === 'pending' ? 'bg-warning' : item.status === 'Accepted' ? 'bg-success' : item.status === 'Declined' ? 'bg-danger' : ''}`}>

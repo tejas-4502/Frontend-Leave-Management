@@ -3,6 +3,7 @@ import { Menubar } from 'primereact/menubar';
 import { Button } from 'primereact/button';
 import { Link } from 'react-router-dom';
 import { SplitButton } from 'primereact/splitbutton';
+import { Avatar } from 'primereact/avatar';
 
 export function Nav() {
     const items = [
@@ -76,22 +77,24 @@ export function Navadmin() {
     ];
 
     const end = (
-        <SplitButton
-            label="admin@gmail.com"
-            icon="pi pi-user"
-            model={[
-                {
-                    label: 'Logout',
-                    icon: 'pi pi-power-off',
-                    command: () => {
-                        // Perform logout action here
-                        sessionStorage.removeItem('loggedInAdmin');
-                        // Redirect to login page 
-                        window.location.href = '/login';
+        <>
+            <SplitButton
+                label="admin@gmail.com"
+                icon={<Avatar image="https://icon-library.com/images/admin-login-icon/admin-login-icon-26.jpg" shape="circle" style={{ marginRight: "10px" }} />}
+                model={[
+                    {
+                        label: 'Logout',
+                        icon: 'pi pi-power-off',
+                        command: () => {
+                            // Perform logout action here
+                            sessionStorage.removeItem('loggedInAdmin');
+                            // Redirect to login page 
+                            window.location.href = '/login';
+                        },
                     },
-                },
-            ]}
-        />
+                ]}
+            />
+        </>
     );
 
     const start = <img alt="logo" src="https://hrone.cloud/wp-content/uploads/2021/05/leave-management-1.png" height="30" className="mt-6"></img>;
